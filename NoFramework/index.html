@@ -9,28 +9,33 @@
 </head>
 <body>
 
-    <div class="container">
+    <div class="container" id="app">
         <div class="row">
             <div class="col">
-                <h1 id="1st">JQuery Demo</h1>
-                <h1 id="2nd">Second Header</h1>
+                <h1 id="1st">{{framework}} Demo</h1>
+                <h1 id="2nd">Vue says hello {{name}}</h1>
             </div>
         </div>
         <div class="row">
             <div class="col" id="alert-col">
+                <input type="text" class="form-control" placeholder="What is your name?" v-model="name"/>
+
                 <div class="alert alert-primary" role="alert">
                     A simple primary alert—check it out!
                 </div>
-                <button type="button" class="btn btn-primary">Primary</button>
+                <button type="button" class="btn btn-primary" @click="click">Primary</button>
                 <button type="button" class="btn btn-success" id="new">Success</button>
             </div>
             <div class="col">
                 <div class="card" style="width: 18rem;">
                     <img src="..." class="card-img-top" alt="...">
                     <div class="card-body">
-                        <h5 class="card-title">Card title</h5>
-                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                        <a href="#" class="btn btn-primary">Go somewhere</a>
+                        <h5 class="card-title">Cart Total: {{total}}</h5>
+                        <p class="card-text" v-for="x in items">
+                            <input style="width: 50%; float: left;" v-model="x.name" placeholder="Item Name"/>
+                            <input style="width: 50%;" v-model="x.price"/>
+                        </p>
+                        <a href="#" class="btn btn-primary" @click.prevent="addItem">Add Item</a>
                     </div>
                 </div>
             </div>
@@ -45,11 +50,37 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
     <script>
         $(function(){
             $("#new").on('click', function(){
                 $(".alert").clone().appendTo("#alert-col");
             })
+        });
+    </script>
+
+    <script>
+        var app = new Vue({
+            el: '#app',
+            data: {
+                framework: 'Vue',
+                name: null,
+                items: []
+            },
+            methods: {
+                click(){
+                    this.framework = 'Used to be jQuery, but now it is Vue';
+                },
+                addItem(){
+                    this.items.push({name: '', price: 0.0});
+                }
+            },
+            computed: {
+                total(){
+                    return this.items.reduce((prev, x) => prev + +x.price, 0)
+                }
+            }
         });
     </script>
 </body>

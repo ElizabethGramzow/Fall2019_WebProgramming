@@ -22,6 +22,11 @@
         About
       </router-link>
 
+      <router-link active-class="active" to="/game" class="navbar-item">
+        <i class="fas fa-gamepad fa-pull-left"></i>
+        Game
+      </router-link>
+
       <div class="navbar-item has-dropdown is-hoverable" active-class="kind-of-active">
         <a class="navbar-link">
           More

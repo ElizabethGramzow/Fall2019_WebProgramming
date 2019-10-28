@@ -1,7 +1,7 @@
 <template>
   <nav class="navbar" role="navigation" aria-label="main navigation">
   <div class="navbar-brand">
-    <router-link to="/" class="navbar-item">
+    <router-link to="/" class="navbar-item" exact-active-class="active">
         <i class="fas fa-home fa-pull-left"></i>
         Home
     </router-link>
@@ -17,19 +17,22 @@
     <div class="navbar-start">
 
       
-      <router-link to="/about" class="navbar-item">
+      <router-link active-class="active" to="/about" class="navbar-item">
         <i class="fab fa-vuejs fa-pull-left"></i>
         About
       </router-link>
 
-      <div class="navbar-item has-dropdown is-hoverable">
+      <div class="navbar-item has-dropdown is-hoverable" active-class="kind-of-active">
         <a class="navbar-link">
           More
         </a>
 
         <div class="navbar-dropdown">
           <a class="navbar-item">
-            About
+            <router-link active-class="active" to="/about" class="navbar-item">
+              <i class="fab fa-vuejs fa-pull-left"></i>
+              About
+            </router-link>
           </a>
           <a class="navbar-item">
             Jobs
@@ -72,5 +75,12 @@ export default {
 </script>
 
 <style>
-
+  .active {
+    background-color: aliceblue;
+    font-weight: bold;
+  }
+  .kind-of-active {
+    background-color: aliceblue;
+    font-weight: bold;
+  }
 </style>
